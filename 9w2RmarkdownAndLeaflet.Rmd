@@ -1,0 +1,42 @@
+---
+title: "9w2RmarkdownAndLeaflet"
+author: "Bleile"
+date: "8/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Executive Summary
+
+This script will be saved as .rmd to github and through knitr will produce a map of my favorite places using leaflet.
+
+## Instructions
+Create a web page using R Markdown that features a map created with Leaflet. 
+
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity! 
+
+
+```{r initialize, echo=FALSE}
+#setup
+#Load packages
+pacman::p_load(pacman, dplyr, GGally, ggplot2, ggthemes, ggvis, lubridate, plotly, rio, markdown, shiny, tidyverse, leaflet)
+
+```
+## R Markdown and Leaflet
+```{r mapping, echo = TRUE}
+library(leaflet)
+my_map <- leaflet() |> addTiles() 
+my_favs <- data.frame(name=c("Bemmel", "Taytay", "Belfair", "Pemba", "Stockholm", "Virginia Beach", "Tubli", "Bali", "Mazatlan"),
+                      lat = c(51.892601, 14.562280, 47.450851, -4.915833, 59.332790, 36.850769, 26.188910, -8.455470, 23.200630), 
+                      lng = c(5.896940, 121.147370, -122.827431, 39.679069, 18.064489, -76.285873, 50.552680, 115.071579, -106.421516))
+                 
+my_map |>
+leaflet() |> addTiles() |> addMarkers(my_favs$lng, my_favs$lat, popup=my_favs$name)
+```
+## My Favorite Places as of 14 August, 2021
+
